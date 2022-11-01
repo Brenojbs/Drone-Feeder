@@ -1,5 +1,6 @@
-package org.dronefeeder.application.core.domain;
+package org.dronefeeder.entity;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class DroneEntity {
+public class DroneEntity extends PanacheEntityBase {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +20,8 @@ public class DroneEntity {
   private String entregaAtual;
   private boolean ocupado;
 
-  @OneToMany(mappedBy = "droneEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "droneEntity", cascade = CascadeType.ALL,
+      orphanRemoval = true)
   private List<EntregaEntity> entregas;
 
   public String getCoordenadas() {

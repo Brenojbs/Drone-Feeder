@@ -1,38 +1,13 @@
-package org.dronefeeder.application.core.domain;
+package org.dronefeeder.dto;
 
 import java.time.LocalDate;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import org.dronefeeder.entity.DroneEntity;
 
-@Entity
-public class EntregaEntity {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-
-  @ManyToOne
-  private DroneEntity droneEntity;
-
+public class EntregaDto {
   private String endereço;
   private String destinatario;
-
-  private Long droneId;
   private LocalDate DataEHora;
-
-  // "Separação", "Em transito" e "Entregue"
   private String StatusEntrega;
-
-  public DroneEntity getDroneEntity() {
-    return droneEntity;
-  }
-
-  public void setDroneEntity(DroneEntity droneEntity) {
-    this.droneEntity = droneEntity;
-  }
 
   public String getEndereço() {
     return endereço;
@@ -50,14 +25,6 @@ public class EntregaEntity {
     this.destinatario = destinatario;
   }
 
-  public Long getDroneId() {
-    return droneId;
-  }
-
-  public void setDroneId(Long droneId) {
-    this.droneId = droneId;
-  }
-
   public LocalDate getDataEHora() {
     return DataEHora;
   }
@@ -73,6 +40,4 @@ public class EntregaEntity {
   public void setStatusEntrega(String statusEntrega) {
     StatusEntrega = statusEntrega;
   }
-
-
 }
