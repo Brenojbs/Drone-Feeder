@@ -13,6 +13,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import org.dronefeeder.commons.EntidadeExistenteException;
+import org.dronefeeder.commons.EntidadeNaoEncontradaException;
 import org.dronefeeder.dto.EntregaDto;
 import org.dronefeeder.service.EntregaService;
 
@@ -43,7 +45,7 @@ public class EntregaController {
    * Metodo salvar também adiciona data e hora no EntregaDto.
    */
   @POST
-  public Response salvar(EntregaDto dto) {
+  public Response salvar(EntregaDto dto) throws EntidadeExistenteException {
     LocalDateTime dataEHora = LocalDateTime.now();
     dto.setDataEHora(dataEHora);
     service.salvar(dto);
@@ -52,14 +54,15 @@ public class EntregaController {
 
   @PATCH
   @Path("/{id}")
-  public Response editar(@PathParam("id") Long id, EntregaDto dto) {
+  public Response editar(@PathParam("id") Long id, EntregaDto dto)
+      throws EntidadeNaoEncontradaException {
     service.editar(id, dto);
     return Response.ok().build();
   }
 
   @DELETE
   @Path("/{id}")
-  public Response deletar(@PathParam("id") Long id) {
+  public Response deletar(@PathParam("id") Long id) throws EntidadeNaoEncontradaException {
     service.deletar(id);
     return Response.ok().build();
   }
