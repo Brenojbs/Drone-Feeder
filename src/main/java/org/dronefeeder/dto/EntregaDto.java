@@ -1,12 +1,11 @@
 package org.dronefeeder.dto;
 
-import java.time.LocalDate;
-import org.dronefeeder.entity.DroneEntity;
+import java.time.LocalDateTime;
 
 public class EntregaDto {
   private String endereço;
   private String destinatario;
-  private LocalDate DataEHora;
+  private LocalDateTime DataEHora;
   private String StatusEntrega;
 
   public String getEndereço() {
@@ -25,11 +24,11 @@ public class EntregaDto {
     this.destinatario = destinatario;
   }
 
-  public LocalDate getDataEHora() {
+  public LocalDateTime getDataEHora() {
     return DataEHora;
   }
 
-  public void setDataEHora(LocalDate dataEHora) {
+  public void setDataEHora(LocalDateTime dataEHora) {
     DataEHora = dataEHora;
   }
 
