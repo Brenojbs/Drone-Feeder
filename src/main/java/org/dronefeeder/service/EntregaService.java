@@ -52,7 +52,6 @@ public class EntregaService {
       if (EntregaEntity.findById(id) == null) {
         throw new EntidadeNaoEncontradaException();
       }
-      entrega.setDataEHora(dto.getDataEHora());
       entrega.setDestinatario(dto.getDestinatario());
       entrega.setDroneEntity(drone.listar().stream().filter(drone -> drone.isOcupado() == false)
           .findAny().orElseThrow());
