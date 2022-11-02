@@ -1,12 +1,12 @@
 package org.dronefeeder.entity;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 @Entity
 public class EntregaEntity extends PanacheEntityBase {
@@ -21,7 +21,7 @@ public class EntregaEntity extends PanacheEntityBase {
   private String endereço;
   private String destinatario;
 
-  private LocalDate DataEHora;
+  private LocalDateTime DataEHora;
 
   // "Separação", "Em transito" e "Entregue"
   private String StatusEntrega;
@@ -50,11 +50,11 @@ public class EntregaEntity extends PanacheEntityBase {
     this.destinatario = destinatario;
   }
 
-  public LocalDate getDataEHora() {
+  public LocalDateTime getDataEHora() {
     return DataEHora;
   }
 
-  public void setDataEHora(LocalDate dataEHora) {
+  public void setDataEHora(LocalDateTime dataEHora) {
     DataEHora = dataEHora;
   }
 
