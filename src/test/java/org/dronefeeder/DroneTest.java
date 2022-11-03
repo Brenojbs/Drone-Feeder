@@ -1,7 +1,6 @@
 package org.dronefeeder;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import io.quarkus.test.junit.QuarkusTest;
@@ -96,7 +95,7 @@ public class DroneTest {
         .when()
         .delete("/drone/99")
         .then()
-        .statusCode(500);
+        .statusCode(404);
   }
 
   @Test()
@@ -107,7 +106,7 @@ public class DroneTest {
         .when()
         .get("/drone/99")
         .then()
-        .statusCode(500);
+        .statusCode(404);
   }
 
   @Test()
@@ -123,6 +122,6 @@ public class DroneTest {
         .when()
         .patch("/drone/99")
         .then()
-        .statusCode(500);
+        .statusCode(404);
   }
 }
