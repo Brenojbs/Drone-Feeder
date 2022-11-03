@@ -22,7 +22,7 @@ public class DroneEntity extends PanacheEntityBase {
 
   @OneToMany(mappedBy = "droneEntity", cascade = CascadeType.ALL,
       orphanRemoval = true)
-  private List<EntregaEntity> entregas;
+  public List<EntregaEntity> entregas;
 
   public String getCoordenadas() {
     return coordenadas;
