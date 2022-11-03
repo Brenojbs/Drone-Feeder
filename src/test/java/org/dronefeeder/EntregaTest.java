@@ -1,8 +1,13 @@
 package org.dronefeeder;
 
 import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.Arrays;
+import java.util.List;
 import org.dronefeeder.dto.DroneDto;
 import org.dronefeeder.dto.EntregaDto;
+import org.dronefeeder.entity.EntregaEntity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -36,15 +41,17 @@ public class EntregaTest {
         .statusCode(201);
   }
 
-  // @Test
-  // @Order(10)
-  // @DisplayName("10 - Endpoint '/get' trás a lista de todos as Entregas.")
-  // public void testListarEntregas() {
-  // this.testCriaEntrega(); // Cadastra 1 Entrega.
-  // List<EntregaEntity> entregaList =
-  // Arrays.asList(given().when().get("/entrega").as(EntregaEntity[].class));
-  // assertEquals(1, entregaList.size());
-  // }
+   @Test
+   @Order(10)
+   @DisplayName("10 - Endpoint '/get' trás a lista de todos as Entregas.")
+   public void testListarEntregas() {
+
+   this.testCriaEntrega(); // Cadastra 1 Entrega.
+
+   List<EntregaEntity> entregaList =
+   Arrays.asList(given().when().get("/entrega").as(EntregaEntity[].class));
+   assertEquals(1, entregaList.size());
+   }
 
   @Test
   @Order(11)
@@ -66,14 +73,14 @@ public class EntregaTest {
   @DisplayName("13 - Exception ao deletar Entrega inexistente.")
   public void testDeletarEntregaInvalido() {
 
-    given().when().delete("/entrega/99").then().statusCode(500);
+    given().when().delete("/entrega/99").then().statusCode(404);
   }
 
   @Test()
   @Order(14)
   @DisplayName("14 - Exception ao buscar Entrega inexistente.")
   public void testBuscarEntregaInvalido() {
-    given().when().get("/entrega/aaaa").then().statusCode(404);
+    given().when().get("/entrega/aaaa").then().statusCode(500);
   }
 
   @Test()
@@ -84,6 +91,6 @@ public class EntregaTest {
     entrega.setDestinatario("Rua veia!"); // Altera a Entrega
 
     given().contentType("application/json").body(entrega).when().patch("/entrega/1").then()
-        .statusCode(500);
+        .statusCode(404);
   }
 }
