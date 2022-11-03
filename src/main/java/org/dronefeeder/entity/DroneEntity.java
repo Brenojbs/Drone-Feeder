@@ -1,6 +1,5 @@
 package org.dronefeeder.entity;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 @Entity
 public class DroneEntity extends PanacheEntityBase {
@@ -20,9 +20,8 @@ public class DroneEntity extends PanacheEntityBase {
   private String entregaAtual;
   private boolean ocupado;
 
-  @OneToMany(mappedBy = "droneEntity", cascade = CascadeType.ALL,
-      orphanRemoval = true)
-  private List<EntregaEntity> entregas;
+  @OneToMany(mappedBy = "droneEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+  public List<EntregaEntity> entregas;
 
   public String getCoordenadas() {
     return coordenadas;
