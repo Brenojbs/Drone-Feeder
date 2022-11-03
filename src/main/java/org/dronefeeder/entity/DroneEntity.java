@@ -20,7 +20,8 @@ public class DroneEntity extends PanacheEntityBase {
   private String entregaAtual;
   private boolean ocupado;
 
-  @OneToMany(mappedBy = "droneEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "droneEntity", cascade = CascadeType.ALL,
+      orphanRemoval = true)
   public List<EntregaEntity> entregas;
 
   public String getCoordenadas() {
