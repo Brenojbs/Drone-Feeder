@@ -3,17 +3,18 @@ package org.dronefeeder.dto;
 import java.time.LocalDateTime;
 
 public class EntregaDto {
-  private String endereço;
+
+  private String endereco;
   private String destinatario;
   private LocalDateTime DataEHora;
   private String StatusEntrega;
 
-  public String getEndereço() {
-    return endereço;
+  public String getEndereco() {
+    return endereco;
   }
 
-  public void setEndereço(String endereço) {
-    this.endereço = endereço;
+  public void setEndereco(String endereco) {
+    this.endereco = endereco;
   }
 
   public String getDestinatario() {

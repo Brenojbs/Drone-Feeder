@@ -24,32 +24,30 @@ public class EntregaService {
 
   @Transactional
   public void salvar(EntregaDto dto) throws EntidadeExistenteException {
-    try {
 
-      EntregaEntity entrega = new EntregaEntity();
+    EntregaEntity entrega = new EntregaEntity();
 
-      if (this.listar().stream().filter(entr -> entr.getDataEHora() == dto.getDataEHora())
-          .findFirst().isPresent()) {
-        throw new EntidadeExistenteException();
-      }
-      DroneEntity droneEntidade =
-          this.drone.listar().stream().filter(drone -> !drone.isOcupado()).findAny().orElseThrow();
-
-      entrega.setDataEHora(dto.getDataEHora());
-      entrega.setDestinatario(dto.getDestinatario());
-      entrega.setDroneEntity(droneEntidade);
-      entrega.setEndereço(dto.getEndereço());
-      entrega.setStatusEntrega(dto.getStatusEntrega());
-      entrega.persist();
-      droneEntidade.entregas.add(entrega);
-      droneEntidade.persist();
-    } catch (EntidadeExistenteException e) {
-      throw e;
+    if (this.listar().stream()
+        .anyMatch(entr -> entr.getDataEHora() == dto.getDataEHora())) {
+      throw new EntidadeExistenteException();
     }
+    DroneEntity droneEntidade =
+        this.drone.listar().stream().filter(drone -> !drone.isOcupado())
+            .findAny().orElseThrow();
+
+    entrega.setDataEHora(dto.getDataEHora());
+    entrega.setDestinatario(dto.getDestinatario());
+    entrega.setDroneEntity(droneEntidade);
+    entrega.setEndereco(dto.getEndereco());
+    entrega.setStatusEntrega(dto.getStatusEntrega());
+    entrega.persist();
+    droneEntidade.entregas.add(entrega);
+    droneEntidade.persist();
   }
 
   @Transactional
-  public void editar(Long id, EntregaDto dto) throws EntidadeNaoEncontradaException {
+  public void editar(Long id, EntregaDto dto)
+      throws EntidadeNaoEncontradaException {
     try {
 
       EntregaEntity entrega = EntregaEntity.findById(id);
@@ -58,8 +56,8 @@ public class EntregaService {
       }
       entrega.setDestinatario(dto.getDestinatario());
       entrega.setDroneEntity(this.drone.listar().stream()
-          .filter(drone -> drone.isOcupado() == false).findAny().orElseThrow());
-      entrega.setEndereço(dto.getEndereço());
+          .filter(drone -> !drone.isOcupado()).findAny().orElseThrow());
+      entrega.setEndereco(dto.getEndereco());
       entrega.setStatusEntrega(dto.getStatusEntrega());
       entrega.persist();
     } catch (EntidadeNaoEncontradaException e) {

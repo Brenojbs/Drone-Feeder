@@ -1,24 +1,24 @@
 package org.dronefeeder.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 @Entity
 public class EntregaEntity extends PanacheEntityBase {
 
+  @ManyToOne
+  @JsonIgnore
+  public DroneEntity droneEntity;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-
-  @ManyToOne
-  public DroneEntity droneEntity;
-
-  private String endereço;
+  private String endereco;
   private String destinatario;
 
   private LocalDateTime DataEHora;
@@ -34,12 +34,12 @@ public class EntregaEntity extends PanacheEntityBase {
     this.droneEntity = droneEntity;
   }
 
-  public String getEndereço() {
-    return endereço;
+  public String getEndereco() {
+    return endereco;
   }
 
-  public void setEndereço(String endereço) {
-    this.endereço = endereço;
+  public void setEndereco(String endereco) {
+    this.endereco = endereco;
   }
 
   public String getDestinatario() {
@@ -66,5 +66,7 @@ public class EntregaEntity extends PanacheEntityBase {
     StatusEntrega = statusEntrega;
   }
 
-
+  public Long getId() {
+    return id;
+  }
 }
