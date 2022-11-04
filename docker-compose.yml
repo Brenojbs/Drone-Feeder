@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: drone-feeder-db
+    ports:
+      - 3306:3306
+  drone-feeder:
+    image: drone-feeder
+    build: .
+    restart: always
+    ports:
+      - 8888:8888
+    links:
+      - mysqldb:database
