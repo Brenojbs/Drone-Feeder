@@ -16,7 +16,7 @@ public class EntregaEntity extends PanacheEntityBase {
   private Long id;
 
   @ManyToOne
-  private DroneEntity droneEntity;
+  public DroneEntity droneEntity;
 
   private String endereço;
   private String destinatario;
