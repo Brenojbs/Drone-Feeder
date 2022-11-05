@@ -28,6 +28,11 @@ public class DroneVideoController {
     return Response.ok(service.buscarId(id)).build();
   }
 
+  @GET
+  public Response listar() {
+    return Response.ok(service.listar()).build();
+  }
+
   @POST
   public Response salvar(DroneVideoDto dto) {
     service.salvar(dto);
