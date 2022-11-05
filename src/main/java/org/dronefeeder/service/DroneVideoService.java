@@ -1,5 +1,6 @@
 package org.dronefeeder.service;
 
+import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 import org.dronefeeder.commons.DroneVideoNaoEncontradoException;
@@ -15,6 +16,11 @@ public class DroneVideoService {
     DroneVideoEntity droneVideo = new DroneVideoEntity();
     droneVideo.setUrl(dto.getUrl());
     droneVideo.persist();
+  }
+
+
+  public List<DroneVideoEntity> listar() {
+    return DroneVideoEntity.listAll();
   }
 
   public DroneVideoEntity buscarId(Long id) {
