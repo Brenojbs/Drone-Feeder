@@ -30,8 +30,11 @@ public class GeneralException implements ExceptionMapper<Exception> {
       return Response.status(Status.CONFLICT).entity(dataError).build();
     }
 
+    if (e instanceof DroneVideoNaoEncontradoException) {
+      dataError.setError(e.getMessage());
+      return Response.status(Status.NOT_FOUND).entity(dataError).build();
+    }
     dataError.setError(e.getMessage());
-    return Response.status(Status.INTERNAL_SERVER_ERROR).entity(dataError)
-        .build();
+    return Response.status(Status.INTERNAL_SERVER_ERROR).entity(dataError).build();
   }
 }
