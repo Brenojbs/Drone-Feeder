@@ -2,8 +2,6 @@ package org.dronefeeder;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import io.quarkus.test.junit.QuarkusTest;
 import java.util.Arrays;
 import java.util.List;
 import org.dronefeeder.dto.DroneDto;
@@ -12,6 +10,7 @@ import org.dronefeeder.entity.EntregaEntity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import io.quarkus.test.junit.QuarkusTest;
 
 
 @QuarkusTest
@@ -28,8 +27,7 @@ public class EntregaTest {
     drone.setCoordenadas("0, 0");
     drone.setOcupado(false);
 
-    given().contentType("application/json").body(drone).when().post("/drone")
-        .then()
+    given().contentType("application/json").body(drone).when().post("/drone").then()
         .statusCode(201);
 
     entrega.setDestinatario("Rua Estrada Travessa");
@@ -38,8 +36,7 @@ public class EntregaTest {
     // "Separação", "Em transito" e "Entregue"
     entrega.setStatusEntrega("Separação");
 
-    given().contentType("application/json").body(entrega).when()
-        .post("/entrega").then()
+    given().contentType("application/json").body(entrega).when().post("/entrega").then()
         .statusCode(201);
   }
 
@@ -52,8 +49,6 @@ public class EntregaTest {
 
     List<EntregaEntity> entregaList =
         Arrays.asList(given().when().get("/entrega").as(EntregaEntity[].class));
-
-    System.out.println(entregaList);
 
     assertEquals(1, entregaList.size());
   }
@@ -95,8 +90,7 @@ public class EntregaTest {
     EntregaDto entrega = new EntregaDto();
     entrega.setDestinatario("Rua veia!"); // Altera a Entrega
 
-    given().contentType("application/json").body(entrega).when()
-        .patch("/entrega/99").then()
+    given().contentType("application/json").body(entrega).when().patch("/entrega/99").then()
         .statusCode(404);
   }
 }
